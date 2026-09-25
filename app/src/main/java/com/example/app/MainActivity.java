@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
         botaoAvancar.setOnClickListener(v -> {
             posicao++;
             imageView.setImageResource(imagens[posicao]);
+            if(posicao > 3) posicao=-1;
+            //if(posicao > imagens.length) posicao=0;
+        });
+
+        botaoVoltar.setOnClickListener(view -> {
+            if (posicao < 1) posicao = imagens.length -1;
+            posicao--;
+            imageView.setImageResource(imagens[posicao]);
+            //if (posicao < 0) posicao = imagens.length -1;
         });
 
     }
