@@ -2,7 +2,9 @@ package com.example.app;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,9 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    String nomes[] = new String[]{"nome1", "nome2", "nome3", "nome4", "nome5", "nome6", "nome7"};
+    ArrayList<String> nomes;
+            //= new String[]{"nome1", "nome2", "nome3", "nome4", "nome5", "nome6", "nome7"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,12 +29,19 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        nomes = new ArrayList<>();
         ListView listanomes = findViewById(R.id.ListView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.iteml_ista, R.id.textView, nomes);
         listanomes.setAdapter(adapter);
         listanomes.setOnItemClickListener((adapterView, view, i, l) -> {
-            Toast.makeText(getApplicationContext(), nomes[i], Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), nomes.get(i), Toast.LENGTH_LONG).show();
         });
+        Button b2 = findViewById(R.id.buttond);
+        TextView n = findViewById(R.id.textv);
 
+        b2.setOnClickListener(view -> {
+            nomes.add(n.getText().toString());
+            adapter.notifyDataSetChanged();
+        });
     }
 }
